@@ -31,7 +31,7 @@ function App() {
           <p className=' text-sm md:text-3xl my-'>serie(n) = 5triangular(n) - 2fibofacci(n) + primo(n+1)</p>
         </section>
 
-        <section className='gap-4 space-y-4 md:flex md:flex-cols py-8'>
+        <section className='space-y-4 md:flex md:flex-cols py-8'>
           <Formulario className='grid gap-4 md:w-1/4 mx-auto' calcular={actualizarN}></Formulario>
           <Resultado className='md:w-1/2 space-y-4' numeroN={n} ></Resultado>
         </section>
