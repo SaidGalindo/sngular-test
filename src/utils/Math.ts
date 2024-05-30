@@ -30,22 +30,13 @@ export function esPrimo(num: number): boolean {
   return true;
 }
 
-// Función para encontrar el (n+1)-ésimo número primo
 export function calcularSiguientePrimo(n: number):number {
-  // while (!esPrimo(n)) n++;
-  // return n;
   return esPrimo(n) ? n : calcularSiguientePrimo(n+1)
 }
 
 export function serie(n: number) {
-  console.log('n', n);
-  
   const triangularRes = calcularTriangular(n);
-  console.log('triangular:', triangularRes);
-  
   const fibonacciRes = fibonacci(n);
-  console.log('fibonacci:', fibonacciRes);
   const primoRes = calcularSiguientePrimo(n + 1);
-  console.log('siguiente primo:', primoRes);
   return 5 * triangularRes - 2 * fibonacciRes + primoRes;
 }

@@ -6,14 +6,21 @@ import userEvent from '@testing-library/user-event'
 import Formulario from '../components/Formulario'
 import App from '../App'
 import { calcularSiguientePrimo, calcularTriangular, esPrimo, fibonacci, serie } from '../utils/Math'
+import { Resultado } from '../components/Resultado';
 
 
 
-it('renders Formulario component', () => {
-    // render(<Formulario />);
-    // render(<Formulario />)
-    const msg = screen.queryByText("Hello worlddd")
-    expect(msg).toBeDefined()
+it('Renders Formulario component', () => {
+    render(<Formulario />);
+    const msg = screen.queryByText(/Valor/i)
+    expect(msg).toBeVisible();
+
+});
+
+it('Renders Resultado component', () => {
+    render(<Resultado numeroN={5} />);
+    const msg = screen.queryByText(/Resultado/i)
+    expect(msg).toBeVisible();
 
 });
 
@@ -33,6 +40,7 @@ it('Es primo', () => {
     expect(esPrimo(3)).toBe(true)
     expect(esPrimo(5)).toBe(true)
     expect(esPrimo(7)).toBe(true)
+    expect(esPrimo(8)).toBe(false)
     expect(esPrimo(495)).toBe(false)
     expect(esPrimo(500)).toBe(false)
     expect(esPrimo(503)).toBe(true)
@@ -55,13 +63,16 @@ it('Siguiente primo', () => {
 });
 
 it('Serie', () => {
-    //3: 6, 3, 3
     expect(serie(1)).toBe(5)
     expect(serie(3)).toBe(31)
+    expect(serie(8)).toBe(149)
     expect(serie(10)).toBe(176)
+    expect(serie(12)).toBe(115)
     expect(serie(15)).toBe(-603)
     expect(serie(20)).toBe(-12457)
     expect(serie(21)).toBe(-20714)
+    expect(serie(25)).toBe(-148396)
     expect(serie(30)).toBe(-1661724)
+    expect(serie(40)).toBe(-204664169)
 });
 

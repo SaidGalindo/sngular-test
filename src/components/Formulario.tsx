@@ -1,26 +1,37 @@
-import { TextField } from '@mui/material'
-import  { useState } from 'react'
-import {calcularTriangular, fibonacci, serie, } from '../utils/Math'
+import { Button, TextField } from '@mui/material'
+import { ChangeEvent, useState } from 'react'
+import { calcularTriangular, fibonacci, serie, } from '../utils/Math'
 
 
-interface props{
-    calcular: CallableFunction 
+interface props {
+    calcular?: (n: number) => void
+    className?: string
 }
 
-const Formulario: React.FC<props> = ({calcular}) => {
-  const [n, setN] = useState(0)
+const Formulario: React.FC<props> = ({ calcular, className }) => {
+    const [n, setN] = useState(0)
 
-  const calcularSerie = () => {
-    calcular(n)
-  }
-  
-  return (
-        <div className='grid gap-4'>
-            <TextField type='number' value={n} onChange={(e) => setN(Number(e.target.value))} style={{ backgroundColor: 'white' }}></TextField>
-            <button onClick={calcularSerie}>
-                Calcular
-                {/* count is {count} */}
-            </button>
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const newValue = e.target.value;
+        const regex = /^[+-]?(\d*\.?\d*)$/;
+        if (regex.test(newValue) || newValue)
+            setN(Number(newValue));
+    }
+
+
+
+
+    const calcularSerie = () => {
+        if (calcular !== undefined) calcular(n)
+    }
+
+    return (
+        <div className={className}>
+            <h2>Valor de N</h2>
+            <TextField type='text' className='rounded-md'
+                inputProps={{ min: 0, style: { textAlign: 'center', fontSize: 30, padding: 10 } }}
+                value={n} onChange={handleChange} style={{ backgroundColor: 'white' }}></TextField>
+            <Button variant='contained' onClick={calcularSerie} >Calcular</Button>
         </div>
     )
 }
